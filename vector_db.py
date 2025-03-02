@@ -30,7 +30,7 @@ charms = {
 }
 
 # Store each charm in Redis with its vector converted to bytes
-for charm_name, vector in charms.keys():
+for charm_name, vector in charms.items():
     r.set(f"charm:{charm_name}", vector.tobytes())  # Convert NumPy array to bytes for storage
     print(f"Added charm: {charm_name} with vector: {vector}")  # Print confirmation
 
@@ -41,7 +41,7 @@ print(f"\nQuery Vector: {query_vector}")  # Display query vector
 
 # Find the most similar charms by calculating cosine similarity
 results = []
-for charm_name, vector in charms.keys():
+for charm_name, vector in charms.items():
     similarity = cosine_similarity(query_vector, vector)  # Compute similarity score
     results.append((charm_name, similarity))  # Store results
 
